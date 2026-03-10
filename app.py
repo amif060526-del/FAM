@@ -18,11 +18,16 @@ zh_ko_dict = {
     "愛": "사랑"
 }
 
+
+
+
+# homepage process
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/ask.html', methods=['GET', 'POST'])
+
+@app.route('/ask', methods=['GET', 'POST'])
 def ask():
     if request.method == 'POST':
         # 2. 讀取學生的問題
@@ -35,5 +40,8 @@ def ask():
     return render_template('ask.html', question="", answer="")
 
 
+
 if __name__ == '__main__':
-    app.run(debug=False)  # 不觸發 reloader
+    # 開發用；部署用 gunicorn（見下方）
+    app.run(host='0.0.0.0', debug=False)
+
