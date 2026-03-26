@@ -18,7 +18,7 @@ zh_ko_dict = {
     "愛": "사랑"
 }
 
-zh_ko_dict = {
+zh_en_dict = {
     "你好": "Hello",
     "謝謝": "Thank",
     "對不起": "Sorry",
