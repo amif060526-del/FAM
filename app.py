@@ -53,7 +53,7 @@ def ask():
             current_dict = zh_ko_dict
             lang_name = "韩文"
         else:
-            current_dict = en_zh_dict
+            current_dict = zh_en_dict
             lang_name = "英文"
  
         # B. 逻辑切换点
