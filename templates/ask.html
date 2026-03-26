@@ -34,7 +34,16 @@
     <section>
         <div class="form-box">
             <form action="/ask" method="post">
-                
+                <label for="dict_type">選擇語言：</label>
+                <select name="dict_type" id="dict_type" onchange="this.form.submit()">
+                    <option value="en" {% if dict_type == 'en' %}selected{% endif %}>中英字典</option>
+                    <option value="ko" {% if dict_type == 'ko' %}selected{% endif %}>中韓字典</option>
+                </select>
+                <br><br>
+                <p><small>來源：{{ source }}</small></p>
+                <input type="submit" value="送出查詢">
+                <input type="button" value="回首頁" onclick="window.location.href='/'">
+            </form>
         </div>
     </section>
 </body>
