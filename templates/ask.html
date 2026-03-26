@@ -9,21 +9,61 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             color: #333;
+            margin: 0;
+            padding: 0;
         }
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
         }
         section {
             margin: 20px;
+            display: flex;
+            justify-content: center;
         }
         .form-box {
             background-color: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* 確保寬度包含 padding */
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        input[type="submit"], input[type="button"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input[type="button"] {
+            background-color: #e7e7e7;
+            color: #333;
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -34,15 +74,31 @@
     <section>
         <div class="form-box">
             <form action="/ask" method="post">
-                <label for="dict_type">選擇語言：</label>
-                <select name="dict_type" id="dict_type" onchange="this.form.submit()">
-                    <option value="en" {% if dict_type == 'en' %}selected{% endif %}>中英字典</option>
-                    <option value="ko" {% if dict_type == 'ko' %}selected{% endif %}>中韓字典</option>
-                </select>
-                <br><br>
-                <p><small>來源：{{ source }}</small></p>
-                <input type="submit" value="送出查詢">
-                <input type="button" value="回首頁" onclick="window.location.href='/'">
+                
+                <div class="form-group">
+                    <label for="dict_type">選擇語言：</label>
+                    <select name="dict_type" id="dict_type">
+                        <option value="en" {% if dict_type == 'en' %}selected{% endif %}>中英字典</option>
+                        <option value="ko" {% if dict_type == 'ko' %}selected{% endif %}>中韓字典</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="question">你的問題 (請輸入中文):</label>
+                    <input type="text" id="question" name="question" value="{{ question }}" placeholder="例如：你好">
+                </div>
+
+                <div class="form-group">
+                    <label for="answer">答案:</label>
+                    <input type="text" id="answer" name="answer" readonly value="{{ answer }}" style="background-color: #f9f9f9;">
+                </div>
+
+                <p style="font-size: 0.9em; color: #666;">來源：{{ source }}</p>
+
+                <div class="button-group">
+                    <input type="submit" value="送出查詢">
+                    <input type="button" value="回首頁" onclick="window.location.href='/'">
+                </div>
             </form>
         </div>
     </section>
