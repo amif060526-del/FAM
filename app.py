@@ -18,6 +18,19 @@ zh_ko_dict = {
     "愛": "사랑"
 }
 
+zh_ko_dict = {
+    "你好": "Hello",
+    "謝謝": "Thank",
+    "對不起": "Sorry",
+    "早安": "Goodmorning",
+    "晚安": "Goodnight",
+    "老師": "Teacher",
+    "學生": "Student",
+    "朋友": "friend",
+    "家人": "family",
+    "愛": "love"
+}
+
 
 
 
