@@ -1,23 +1,12 @@
 
-import requests
- 
-# 使用者輸入
-stock_no = input("請輸入股票代號（例如 2330）：")
-#date = input("請輸入查詢年月（格式：YYYYMMDD，例如 20260301）：")
- 
-# API URL
-url = f"https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&stockNo={stock_no}"
- 
-# 發送請求
-res = requests.get(url)
-data = res.json()
- 
-# 判斷是否成功
-if data["stat"] == "OK":
-    print( data["title"])
-    print( data["fields"])
-    print("資料：")
-    for row in data["data"]:
-        print(row)
-else:
-    print("查無資料，請確認股票代號或日期")
+@app.route('/stock', methods=['GET', 'POST'])
+def stock():
+    if request.method == 'POST':
+        # 2. 讀取使用者輸入的股票號碼
+        question = request.form.get('question', '').strip()
+        # 3. 查詢股票號碼的收盤價
+        answer = zh_ko_dict.get(question, "抱歉，我目前沒有這個股票號碼。")
+        # 4. 回傳答案給使用者
+        return render_template('stock.html', question=question, answer=answer)
+    # GET 時給空白欄位
+    return render_template('stock.html', question="", answer="")
