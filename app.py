@@ -1,57 +1,45 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template
+from bs4 import BeautifulSoup
+import os
 
 app = Flask(__name__)
 
-# 建立題庫
-zh_ko_dict = {
-    "你好": "안녕하세요",
-    "안녕하세요" : "你好",
-    "謝謝": "감사합니다",
-    "對不起": "죄송합니다",
-    "早安": "좋은 아침",
-    "晚安": "안녕히 주무세요",
-    "老師": "선생님",
-    "學生": "학생",
-    "朋友": "친구",
-    "Pikmin": "皮克敏",
-    "家人": "가족",
-    "愛": "사랑"
-}
+html_doc = """
+<div class="result-item">
+  <div class="period-title">第115000049期</div>
+  <div class="period-date">開獎日期 115/05/01</div>
+  <div class="balls">
+    <span class="ball ball-orange">07</span>
+    <span class="ball ball-orange">22</span>
+    <span class="ball ball-orange">27</span>
+    <span class="ball ball-orange">35</span>
+    <span class="ball ball-orange">43</span>
+    <span class="ball ball-orange">48</span>
+  </div>
+  <span class="ball ball-red">45</span>
+</div>
+"""
 
-
-
-
-# homepage process
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    soup = BeautifulSoup(html_doc, "html.parser")
 
+    period = soup.find("div", class_="period-title").text
+    date = soup.find("div", class_="period-date").text
 
-@app.route('/ask', methods=['GET', 'POST'])
-def ask():
-    if request.method == 'POST':
-        # 2. 讀取學生的問題
-        question = request.form.get('question', '').strip()
-        # 3. 查詢題庫的對應答案
-        answer = zh_ko_dict.get(question, "抱歉，我目前沒有這個詞的韓文對應。")
-        # 4. 回傳答案給學生
-        return render_template('ask.html', question=question, answer=answer)
-    # GET 時給空白欄位
-    return render_template('ask.html', question="", answer="")
+    orange_balls = soup.find_all("span", class_="ball ball-orange")
+    numbers = [ball.text for ball in orange_balls]
 
+    special_ball = soup.find("span", class_="ball ball-red").text
 
-@app.route('/stock', methods=['GET', 'POST'])
-def stock():
-    if request.method == 'POST':
-        # 2. 讀取使用者輸入的股票號碼
-        question = request.form.get('question', '').strip()
-        # 3. 查詢股票號碼的收盤價
-        answer = zh_ko_dict.get(question, "抱歉，我目前沒有這個股票號碼。")
-        # 4. 回傳答案給使用者
-        return render_template('stock.html', question=question, answer=answer)
-    # GET 時給空白欄位
-    return render_template('stock.html', question="", answer="")
+    return render_template(
+        "index.html",
+        period=period,
+        date=date,
+        numbers=numbers,
+        special_ball=special_ball
+    )
 
-if __name__ == '__main__':
-    # 開發用；部署用 gunicorn（見下方）
-    app.run(host='0.0.0.0', debug=False)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
