@@ -1,45 +1,53 @@
 from flask import Flask, render_template
-from bs4 import BeautifulSoup
+import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import os
 
 app = Flask(__name__)
 
-html_doc = """
-<div class="result-item">
-  <div class="period-title">第115000049期</div>
-  <div class="period-date">開獎日期 115/05/01</div>
-  <div class="balls">
-    <span class="ball ball-orange">07</span>
-    <span class="ball ball-orange">22</span>
-    <span class="ball ball-orange">27</span>
-    <span class="ball ball-orange">35</span>
-    <span class="ball ball-orange">43</span>
-    <span class="ball ball-orange">48</span>
-  </div>
-  <span class="ball ball-red">45</span>
-</div>
-"""
-
-@app.route("/")
+@app.route('/')
 def index():
-    soup = BeautifulSoup(html_doc, "html.parser")
+    # 讀取 CSV
+    df = pd.read_csv('big_mart_sales.csv')
 
-    period = soup.find("div", class_="period-title").text
-    date = soup.find("div", class_="period-date").text
+    # 取得欄位名稱與資料型別
+    column_info = pd.DataFrame({
+        'Column': df.columns,
+        'Data Type': df.dtypes.astype(str)
+    })
 
-    orange_balls = soup.find_all("span", class_="ball ball-orange")
-    numbers = [ball.text for ball in orange_balls]
+    # Outlet_Size 缺失值補值
+   most_common = df['Outlet_Size'].mode()[0]
+    df['Outlet_Size'].fillna(most_common, inplace=True)
 
-    special_ball = soup.find("span", class_="ball ball-red").text
+    # Outlet_Type 統計
+    outlet_counts = df['Outlet_Type'].value_counts()
+
+    # 建立 static 資料夾
+    if not os.path.exists('static'):
+        os.makedirs('static')
+
+    # 畫圖
+    plt.figure(figsize=(8, 5))
+    outlet_counts.plot(kind='bar')
+    plt.title('Outlet Type Histogram')
+    plt.xlabel('Outlet Type')
+    plt.ylabel('Count')
+    plt.xticks(rotation=30)
+    plt.tight_layout()
+
+    chart_path = 'static/outlet_type_hist.png'
+    plt.savefig(chart_path)
+    plt.close()
 
     return render_template(
-        "index.html",
-        period=period,
-        date=date,
-        numbers=numbers,
-        special_ball=special_ball
+        'index.html',
+        tables=[column_info.to_html(classes='table table-striped', index=False)],
+        chart=chart_path,
+        missing_fixed=most_common
     )
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
