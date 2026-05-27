@@ -1,23 +1,38 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
+!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>樂透開獎號碼</title>
+    <title>Big Mart Sales Analysis</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    >
 </head>
-<body>
-    <h1>樂透開獎號碼</h1>
+<body class="container mt-4">
 
-    <h2>{{ period }}</h2>
-    <p>{{ date }}</p >
+    <h1 class="mb-4">Big Mart Sales Analysis</h1>
 
-    <h3>一般號碼</h3>
+    <h2>1. 欄位名稱與資料型別</h2>
+<
+    {% for table in tables %}
+        {{ table|safe }}
+    {% endfor %}
+
+    <hr>
+
+    <h2>2. Outlet_Size 缺失值補值</h2>
+
     <p>
-        {% for number in numbers %}
-            <span>{{ number }}</span>
-        {% endfor %}
-    </p >
+        已使用眾數補值：
+        <strong>{{ missing_fixed }}</strong>
+    </p>
 
-    <h3>特別號</h3>
-    <p>{{ special_ball }}</p >
+    <hr>
+
+    <h2>3. Outlet_Type Histogram</h2>
+
+    <img src="/{{ chart }}" class="img-fluid">
+
 </body>
 </html>
