@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h2>天氣查詢</h2>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="city"
+        placeholder="輸入城市">
+
+    <button type="submit">
+        查詢
+    </button>
+
+</form>
+
+{% if weather %}
+
+<h3>{{ weather.city }}</h3>
+
+<p>溫度：{{ weather.temp }} °C</p>
+
+<p>天氣：{{ weather.desc }}</p>
+
+{% endif %}
+
+<a href="/">回首頁</a>
+
+</body>
+</html>
