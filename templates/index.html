@@ -1,38 +1,25 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Big Mart Sales Analysis</title>
-
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    >
+    <title>AI Assistant</title>
 </head>
-<body class="container mt-4">
 
-    <h1 class="mb-4">Big Mart Sales Analysis</h1>
+<body>
 
-    <h2>1. 欄位名稱與資料型別</h2>
-<
-    {% for table in tables %}
-        {{ table|safe }}
-    {% endfor %}
+<h1>AI Movie & Weather Assistant</h1>
 
-    <hr>
+<a href="/weather">
+    <button>天氣查詢</button>
+</a>
 
-    <h2>2. Outlet_Size 缺失值補值</h2>
+<a href="/movie">
+    <button>電影推薦</button>
+</a>
 
-    <p>
-        已使用眾數補值：
-        <strong>{{ missing_fixed }}</strong>
-    </p>
-
-    <hr>
-
-    <h2>3. Outlet_Type Histogram</h2>
-
-    <img src="/{{ chart }}" class="img-fluid">
+<a href="/chat">
+    <button>AI聊天</button>
+</a>
 
 </body>
 </html>
