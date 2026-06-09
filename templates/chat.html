@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>🤖 AI 智慧聊天</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
+    <div class="container">
+        <h2>🤖 AI 智慧聊天</h2>
+        <form method="POST" class="search-form">
+            <input type="text" name="message" placeholder="輸入你想問 AI 的問題..." value="{{ user_message }}" required>
+            <button type="submit">送出對話</button>
+        </form>
 
-<h2>AI聊天</h2>
+        {% if answer %}
+            <div class="chat-container">
+                <div class="chat-bubble user-bubble">
+                    <strong>你：</strong> {{ user_message }}
+                </div>
+                <div class="chat-bubble ai-bubble">
+                    <strong>AI：</strong> {{ answer }}
+                </div>
+            </div>
+        {% endif %}
 
-<form method="POST">
-
-<input
-type="text"
-name="message"
-placeholder="請輸入問題">
-
-<button>
-送出
-</button>
-
-</form>
-
-{% if answer %}
-
-<h3>AI回答：</h3>
-
-<p>{{ answer }}</p>
-
-{% endif %}
-
-<a href="/">回首頁</a>
-
+        <br>
+        <a href="/" class="back-link">返回首頁</a>
+    </div>
 </body>
 </html>
