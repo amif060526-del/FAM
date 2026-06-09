@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h2>電影推薦</h2>
+
+<form method="POST">
+
+<input
+type="text"
+name="keyword"
+placeholder="輸入電影名稱">
+
+<button>
+搜尋
+</button>
+
+</form>
+
+{% for movie in movies %}
+
+<hr>
+
+<h3>{{ movie.title }}</h3>
+
+<p>{{ movie.overview }}</p>
+
+{% endfor %}
+
+<a href="/">回首頁</a>
+
+</body>
+</html>
