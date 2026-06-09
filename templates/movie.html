@@ -1,34 +1,39 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 熱門電影推薦</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
+    <div class="container">
+        <h2>🎬 熱門電影推薦</h2>
+        <form method="POST" class="search-form">
+            <input type="text" name="keyword" placeholder="請輸入電影關鍵字" required>
+            <button type="submit">搜尋電影</button>
+        </form>
 
-<h2>電影推薦</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
 
-<form method="POST">
+        <div class="movie-grid">
+            {% for movie in movies %}
+                <div class="card movie-card">
+                    {% if movie.poster %}
+                        <img src="{{ movie.poster }}" alt="Poster" class="movie-poster">
+                    {% endif %}
+                    <div class="movie-info">
+                        <h3>{{ movie.title }}</h3>
+                        <span class="date">上映日期：{{ movie.release_date }}</span>
+                        <p class="overview">{{ movie.overview }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-<input
-type="text"
-name="keyword"
-placeholder="輸入電影名稱">
-
-<button>
-搜尋
-</button>
-
-</form>
-
-{% for movie in movies %}
-
-<hr>
-
-<h3>{{ movie.title }}</h3>
-
-<p>{{ movie.overview }}</p>
-
-{% endfor %}
-
-<a href="/">回首頁</a>
-
+        <br>
+        <a href="/" class="back-link">返回首頁</a>
+    </div>
 </body>
 </html>
