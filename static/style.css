@@ -1,87 +1,73 @@
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f4f6f9;
-    color: #333;
+    text-align: center;
     margin: 0;
     padding: 0;
 }
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    text-align: center;
-}
-h1 { color: #2c3e50; margin-bottom: 5px; }
-.subtitle { color: #7f8c8d; margin-bottom: 30px; }
-.menu-box {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.btn {
-    padding: 15px;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: transform 0.2s;
-}
-.btn:hover { transform: translateY(-2px); }
-.btn-weather { background-color: #3498db; }
-.btn-movie { background-color: #e74c3c; }
-.btn-chat { background-color: #2ecc71; }
 
-/* 表單與小卡 */
-.search-form input {
-    width: 60%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
+h1, h2 {
+    color: #333;
 }
-.search-form button {
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    background: #007bff;
     padding: 10px 20px;
-    background-color: #34495e;
+    border-radius: 5px;
+}
+
+a:hover {
+    background: #0056b3;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background: green;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
 }
-.card {
-    background: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
+
+button:hover {
+    background: darkgreen;
+}
+
+.result {
     margin-top: 20px;
-    text-align: left;
+    background: white;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
 }
-.weather-card { text-align: center; }
-.weather-card .temp { font-size: 1.5rem; font-weight: bold; color: #e67e22; }
-
-/* 電影排版 */
-.movie-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 20px;
-}
-.movie-card { display: flex; gap: 15px; padding: 10px; }
-.movie-poster { width: 100px; height: 150px; object-fit: cover; border-radius: 4px; }
-.movie-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; }
-.movie-info .date { font-size: 0.85rem; color: #95a5a6; }
-.movie-info .overview { font-size: 0.9rem; color: #555; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-
-/* 聊天對話框 */
-.chat-container { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; text-align: left; }
-.chat-bubble { padding: 12px 16px; border-radius: 8px; max-width: 80%; }
-.user-bubble { background-color: #e1f5fe; align-self: flex-end; }
-.ai-bubble { background-color: #f1f8e9; align-self: flex-start; white-space: pre-wrap; }
-
-.back-link { display: inline-block; margin-top: 20px; color: #7f8c8d; text-decoration: none; }
-.back-link:hover { text-decoration: underline; }
-.error { color: #c0392b; font-weight: bold; }
