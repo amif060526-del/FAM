@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>🌤 天氣即時查詢</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
+    <div class="container">
+        <h2>🌤 天氣即時查詢</h2>
+        <form method="POST" class="search-form">
+            <input type="text" name="city" placeholder="請輸入城市英文（如: Taipei, Tokyo）" required>
+            <button type="submit">查詢天氣</button>
+        </form>
 
-<h2>天氣查詢</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
 
-<form method="POST">
+        {% if weather %}
+            <div class="card weather-card">
+                <h3>城市：{{ weather.city }}</h3>
+                <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="weather-icon">
+                <p class="temp">目前溫度：{{ weather.temp }} °C</p>
+                <p>環境濕度：{{ weather.humidity }} %</p>
+                <p>天氣狀況：{{ weather.desc }}</p>
+            </div>
+        {% endif %}
 
-    <input
-        type="text"
-        name="city"
-        placeholder="輸入城市">
-
-    <button type="submit">
-        查詢
-    </button>
-
-</form>
-
-{% if weather %}
-
-<h3>{{ weather.city }}</h3>
-
-<p>溫度：{{ weather.temp }} °C</p>
-
-<p>天氣：{{ weather.desc }}</p>
-
-{% endif %}
-
-<a href="/">回首頁</a>
-
+        <br>
+        <a href="/" class="back-link">返回首頁</a>
+    </div>
 </body>
 </html>
