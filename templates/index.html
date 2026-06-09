@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-TW">
 <head>
-    <title>AI Assistant</title>
+    <meta charset="UTF-8">
+    <title>綜合功能助手網</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-
-<h1>AI Movie & Weather Assistant</h1>
-
-<a href="/weather">
-    <button>天氣查詢</button>
-</a>
-
-<a href="/movie">
-    <button>電影推薦</button>
-</a>
-
-<a href="/chat">
-    <button>AI聊天</button>
-</a>
-
+    <div class="container">
+        <h1>🌟 綜合功能雲端助手 🌟</h1>
+        <p class="subtitle">Python 期末專題報告展示網站</p>
+        <div class="menu-box">
+            <a href="/weather" class="btn btn-weather">🌤 天氣即時查詢</a>
+            <a href="/movie" class="btn btn-movie">🎬 熱門電影推薦</a>
+            <a href="/chat" class="btn btn-chat">🤖 AI 智慧聊天</a>
+        </div>
+    </div>
 </body>
 </html>
